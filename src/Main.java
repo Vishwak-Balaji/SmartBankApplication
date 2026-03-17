@@ -1,5 +1,5 @@
 
-import java.util.Scanner;
+import java.util.*;
 import model.AccountType;
 import service.BankService;
 public class Main{
