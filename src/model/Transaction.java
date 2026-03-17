@@ -5,7 +5,7 @@ public class Transaction {
     private double amount;
     private String status;
 
-    public Transaction(String operation, double amount , String Status){
+    public Transaction(String operation, double amount , String status){
         this.operation=operation;
         this.amount=amount;
         this.status= status;
