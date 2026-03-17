@@ -9,8 +9,8 @@ public class Main{
         while(true){
             System.out.println("\n===== SMART BANK =====");
             System.out.println("1. Open Account");
-            System.out.println("2. Deposit");
-            System.out.println("3. Withdraw");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Deposit");
             System.out.println("4. Transfer");
             System.out.println("5. Display Accounts");
             System.out.println("6. Top N Accounts");
@@ -36,7 +36,6 @@ public class Main{
                     double balance = scan.nextDouble();
 
                     bank.openAccount(accNo, holderName, type, balance);
-                    System.out.println("Account created Successfully!!");
                     break;
                 case 2:
                     System.out.print("Enter the Account number : ");
@@ -60,6 +59,7 @@ public class Main{
                     System.out.print("Enter Amount : ");
                     double tranAmt = scan.nextDouble();
                     bank.transfer(fromAcc, toAcc, tranAmt);
+                    break;
                 case 5:
                     bank.display();
                     break;
@@ -88,7 +88,8 @@ public class Main{
                     break;
                 case 10:
                     System.out.print("Thank You...");
-                    break;
+                    scan.close();
+                    return;
                 default:
                     System.out.print("Invalid input");
             }

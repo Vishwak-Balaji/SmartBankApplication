@@ -8,7 +8,7 @@ public class Transaction {
     public Transaction(String operation, double amount , String Status){
         this.operation=operation;
         this.amount=amount;
-        this.status=status;
+        this.status= status;
 
     }
 

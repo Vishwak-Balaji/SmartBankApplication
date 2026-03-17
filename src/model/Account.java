@@ -69,8 +69,10 @@ public abstract class Account {
     public void deposit(double amount){
         if(frozen){
             addTransaction("Deposit", amount, "Account Frozen");
+            return;
         }
         balance+=amount;
+        addTransaction("Deposit", amount, "Success");
     }
     public void minStatement(){
         System.out.println("Last Five Transaction : ");

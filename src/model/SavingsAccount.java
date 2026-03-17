@@ -22,6 +22,7 @@ public class SavingsAccount extends Account {
         }
         if(amount>getBalance()-Min_Balance){
             addTransaction("Withdraw", amount, "Insuffieient Balance");
+            return false;
         }
         setBalance(getBalance()-amount);
         incrementSessionWithdrawalCount();

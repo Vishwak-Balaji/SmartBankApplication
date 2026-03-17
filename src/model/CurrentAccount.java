@@ -12,11 +12,11 @@ public class CurrentAccount extends Account {
             addTransaction("Withdraw", amount, "Account is frozen");
             return false;
         }
-        if(amount<getBalance()){
+        if(amount>getBalance()){
             addTransaction("Withdraw", amount, "Insufficient balance");
             return false;
         }
-        if(amount>getBalance()-Min_Balance){
+        if(Min_Balance<getBalance()-amount){
             addTransaction("Withdraw", amount, "violating minimum balance");
             return false;
         }
