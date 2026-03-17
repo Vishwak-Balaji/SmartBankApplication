@@ -45,7 +45,7 @@ public abstract class Account {
     public void setBalance(double balance){
         this.balance=balance;
     }
-    public void resetSetSessionWithdrawalCount(){
+    public void resetSessionWithdrawalCount(){
         sessionWithdrawalCount=0;
     }
     public void incrementSessionWithdrawalCount(){
