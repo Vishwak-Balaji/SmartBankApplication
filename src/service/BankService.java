@@ -10,7 +10,7 @@ public class BankService {
          accountCount=0;
     }
     public void openAccount(String accNo , String name , AccountType type , double balance){
-        if(accountCount>=Max_Account){
+        if(accountCount>Max_Account){
             System.out.println("Account Limit Reached");
             return;
         }
