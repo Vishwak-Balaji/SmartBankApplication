@@ -30,6 +30,6 @@ public class SavingsAccount extends Account {
         return true;
     }
     public double getInterestRate(){
-        return 0.4;
+        return 0.04;
     }
 }
