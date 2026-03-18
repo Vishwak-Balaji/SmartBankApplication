@@ -94,7 +94,7 @@ public class BankService {
         if(success){
             receiver.deposit(amount);
             sender.addTransaction("Transfer Out", amount, "SUCCESS");
-            receiver.addTransaction("Traansfer In", amount, "Success");
+            receiver.addTransaction("Transfer In", amount, "Success");
             System.out.println("Transfered successfully");
         }
         else{
