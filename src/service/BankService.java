@@ -14,9 +14,34 @@ public class BankService {
             System.out.println("Account Limit Reached");
             return;
         }
+        if(findAccount(accNo)!=null){
+            System.out.println("The account already exist.");
+            return;
+        }
+        switch(type){
+            case SAVINGS:
+                if(balance<1000){
+                    System.out.println("Minimum balance for Savings Account is 1000");
+                    return;
+                }
+                break;
+            case CURRENT:
+                if(balance<5000){
+                    System.out.println("Minimum balance for Current Account is 5000");
+                    return;
+                }    
+                break;
+            case FIXED_DEPOSIT:
+                if(balance<10000){
+                    System.out.println("Minimum balance for Fixed deposit Account is 10000");
+                    return;
+                }    
+                break;
+        }
         Account acc = null;
         switch (type){
             case SAVINGS:
+
                 acc= new SavingsAccount(accNo, name, balance);
                 break;
             case CURRENT:
@@ -76,28 +101,29 @@ public class BankService {
             System.out.println("Failure");
         }
     }
-    public void transfer(String fromAcc , String ToAcc , double amount){
+    public void transfer(String fromAcc , String toAcc , double amount){
         Account sender = findAccount(fromAcc);
-        Account receiver = findAccount(ToAcc);
-
-        if(sender==null || receiver==null){
+        Account receiver = findAccount(toAcc);
+        if(sender == null || receiver == null){
             System.out.println("Account not found");
             return;
         }
-         if(sender.isFrozen() || receiver.isFrozen()){
+        if(sender.isFrozen() || receiver.isFrozen()){
             System.out.println("One account is frozen");
             return;
         }
-        
-        boolean success = sender.withdraw(amount);
-
-        if(success){
-            receiver.deposit(amount);
-            sender.addTransaction("Transfer Out", amount, "SUCCESS");
-            receiver.addTransaction("Transfer In", amount, "Success");
-            System.out.println("Transfered successfully");
+        if(amount <= 0){
+            System.out.println("Invalid amount");
+            return;
         }
-        else{
+        boolean success = sender.withdrawWithoutTransaction(amount);
+        if(success){
+            receiver.setBalance(receiver.getBalance() + amount);
+            sender.addTransaction("Transfer Out", amount, "Success", receiver.getAccountNumber());
+            receiver.addTransaction("Transfer In", amount, "Success", sender.getAccountNumber());
+            System.out.println("Transferred successfully");
+        } 
+        else {
             System.out.println("Transfer failed");
         }
     }
@@ -105,7 +131,6 @@ public class BankService {
         for(int i=0;i<accountCount;i++){
             Account acc = accounts[i];
             System.out.println(acc.getAccountNumber()+" | "+acc.getHolderName()+" | "+acc.getAccountType()+" | "+acc.getBalance());
-
         }
     }
     public void topNAccount(int n){
@@ -134,10 +159,11 @@ public class BankService {
     public void applyInterest(){
         for(int i=0;i<accountCount;i++){
             Account acc = accounts[i];
-            if(!acc.isFrozen()){
+            if(!acc.isFrozen() && !acc.getInterestApplied()){
                 double rate = acc.getInterestRate();
                 double interest = acc.getBalance()*rate/12;
                 acc.setBalance(acc.getBalance()+interest);
+                acc.setInterestApplied(true);
             }
         }
         System.out.println("Interest Applied");

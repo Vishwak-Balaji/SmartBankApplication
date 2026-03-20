@@ -1,5 +1,6 @@
 
 import java.util.*;
+import model.Account;
 import model.AccountType;
 import service.BankService;
 public class Main{
@@ -29,9 +30,21 @@ public class Main{
                     String accNo = scan.nextLine();
                     System.out.print("Enter holder name : ");
                     String holderName = scan.nextLine();
-                    System.out.print("Enter account type (SAVINGS/CURRENT/FIXED_DEPOSIT) : ");
-                    String types = scan.nextLine().toUpperCase();
-                    AccountType type = AccountType.valueOf(types);
+                    System.out.println("Choose account type");
+                    System.out.println("1. SAVINGS");
+                    System.out.println("2. CURRENT");
+                    System.out.println("3. FIXED_DEPOSIT");
+                    int typeChoice = scan.nextInt();
+                    AccountType type = null;
+                    if(typeChoice == 1){
+                        type=AccountType.SAVINGS;
+                    }
+                    else if(typeChoice == 2){
+                        type=AccountType.CURRENT;
+                    }
+                    else if(typeChoice == 3){
+                        type=AccountType.FIXED_DEPOSIT;
+                    }
                     System.out.print("Enter Initial Balance : ");
                     double balance = scan.nextDouble();
 
@@ -68,13 +81,14 @@ public class Main{
                     int n = scan.nextInt();
                     bank.topNAccount(n);
                     break;
-                case 7:
+               case 7:
                     System.out.print("Enter Account number : ");
                     String minAcc = scan.nextLine();
-                    if(bank.findAccount(minAcc)!=null){
-                        bank.findAccount(minAcc).minStatement();
-                    }      
-                    else{
+                    Account acc = bank.findAccount(minAcc);
+                    if(acc != null){
+                    acc.minStatement();
+                    } 
+                    else {
                         System.out.println("Account not found");
                     }
                     break;
