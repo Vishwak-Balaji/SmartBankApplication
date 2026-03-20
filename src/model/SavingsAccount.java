@@ -20,7 +20,7 @@ public class SavingsAccount extends Account {
             addTransaction("withdraw", amount, "Violating minimum balance");
             return false;
         }
-        if(amount>getBalance()-Min_Balance){
+        if(amount>getBalance()){
             addTransaction("Withdraw", amount, "Insuffieient Balance");
             return false;
         }
@@ -30,6 +30,6 @@ public class SavingsAccount extends Account {
         return true;
     }
     public double getInterestRate(){
-        return 0.04;
+        return 0.4;
     }
 }

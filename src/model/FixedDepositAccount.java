@@ -9,6 +9,6 @@ public class FixedDepositAccount extends Account{
         return false;
     }
     public double getInterestRate(){
-        return 0.07;
+        return 0.7;
     }
 }
