@@ -17,8 +17,9 @@ public class Main{
             System.out.println("6. Top N Accounts");
             System.out.println("7. Mini Statement");
             System.out.println("8. Apply Interest");
-            System.out.println("9. Unfreeze Account");
-            System.out.println("10. Exit");
+            System.out.println("9. Show Frozen Account");
+            System.out.println("10. Unfreeze Account");
+            System.out.println("11. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = scan.nextInt();
@@ -96,11 +97,14 @@ public class Main{
                     bank.applyInterest();
                     break;
                 case 9:
+                    bank.showFrozenAccount();
+                    break;
+                case 10:
                     System.out.print("Enter Account number : ");
                     String unfreezeAcc = scan.nextLine();
                     bank.unfreezeAcc(unfreezeAcc);    
                     break;
-                case 10:
+                case 11:
                     System.out.print("Thank You...");
                     scan.close();
                     return;

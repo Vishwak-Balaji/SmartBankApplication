@@ -80,13 +80,14 @@ public abstract class Account {
             transactionHead = (transactionHead + 1)%Max_Transaction;
         }
     }
-    public void deposit(double amount){
+    public String deposit(double amount){
         if(frozen){
             addTransaction("Deposit", amount, "Account Frozen");
-            return;
+            return "Cannot deposit, account is frozen";
         }
         balance+=amount;
         addTransaction("Deposit", amount, "Success");
+        return "Deposited Successfully";
     }
     public void minStatement(){
     System.out.println("Last Five Transaction : ");
@@ -108,7 +109,7 @@ public abstract class Account {
         }
     }
 }
-    public abstract  boolean withdraw(double amount);
+    public abstract  String withdraw(double amount);
     public abstract double getInterestRate();
 
     public boolean withdrawWithoutTransaction(double amount){

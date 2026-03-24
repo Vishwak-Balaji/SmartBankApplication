@@ -60,7 +60,6 @@ public class BankService {
                 return accounts[i];
             }
         }
-        System.out.println("Account not Found");
         return null;
     }
     public void deposit(String accNo, double amount){
@@ -73,8 +72,8 @@ public class BankService {
             System.out.println("Invalid amount!");
             return;
         }
-        acc.deposit(amount);
-        System.out.println("Depostied Successfully");
+        String result = acc.deposit(amount);
+        System.out.println(result);
     }
     public void checkFraud(Account acc , double amount){
         if(acc.getSessionWithdrawalCount()>5){
@@ -92,14 +91,11 @@ public class BankService {
             System.out.println("Account not Found!");
             return ;
         }
-        boolean success = acc.withdraw(amount);
-        if(success){
+        String result = acc.withdraw(amount);
+        if(result.equals("SUCCESS")){
             checkFraud(acc, amount);
-            System.out.println("Success");
         }
-        else{
-            System.out.println("Failure");
-        }
+        System.out.println(result);
     }
     public void transfer(String fromAcc , String toAcc , double amount){
         Account sender = findAccount(fromAcc);
@@ -167,6 +163,27 @@ public class BankService {
             }
         }
         System.out.println("Interest Applied");
+    }
+    public void showFrozenAccount(){
+        boolean found = false;
+        System.out.println("Frozen Accounts : ");
+        for(int i =0;i<accountCount;i++){
+            if(accounts[i].isFrozen()){
+                Account acc = accounts[i];
+                System.out.println(
+                    acc.getAccountNumber()+" | "+
+                    acc.getHolderName()+" | "+
+                    acc.getAccountType()+" | "+
+                    acc.getBalance()
+
+                );
+                found = true;
+            }
+            if(!found){
+                System.out.println("No account is frozen");
+            }
+
+        }
     }
 
     public void unfreezeAcc(String accNo){

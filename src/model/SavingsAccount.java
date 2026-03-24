@@ -7,27 +7,27 @@ public class SavingsAccount extends Account {
     public SavingsAccount(String accountNumber , String holderName,double balance){
         super(accountNumber,holderName,AccountType.SAVINGS,balance);
     }
-    public boolean withdraw(double amount){
+    public String withdraw(double amount){
         if(isFrozen()){
-            addTransaction("Withdraw", amount, "The account is frozen");
-            return false;
+            addTransaction("Withdraw", amount, "FAILURE");
+            return "The account is frozen";
         }
         if(amount>DailyWithdrawalLimit){
-            addTransaction("Withdraw", amount, "Exceeds daily withdrawal limit");
-            return false;
+            addTransaction("Withdraw", amount, "FAILURE");
+            return "Exceeds daily withdrawal limi";
         }
         if(getBalance()-amount<Min_Balance){
-            addTransaction("withdraw", amount, "Violating minimum balance");
-            return false;
+            addTransaction("withdraw", amount, "FAILURE");
+            return "Violating minimum balance";
         }
         if(amount>getBalance()){
-            addTransaction("Withdraw", amount, "Insuffieient Balance");
-            return false;
+            addTransaction("Withdraw", amount, "FAILURE");
+            return "Insuffieient Balance";
         }
         setBalance(getBalance()-amount);
         incrementSessionWithdrawalCount();
-        addTransaction("Withdraw", amount, "Success");
-        return true;
+        addTransaction("Withdraw", amount, "SUCCESS");
+        return "SUCCESS";
     }
     public double getInterestRate(){
         return 0.4;

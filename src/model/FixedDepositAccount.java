@@ -4,9 +4,9 @@ public class FixedDepositAccount extends Account{
     public FixedDepositAccount(String accountNumber, String holderName,double Balance){
         super(accountNumber, holderName, AccountType.FIXED_DEPOSIT, Balance);
     }
-    public boolean withdraw(double amount){
-        addTransaction("Withdraw", amount, "Failure");
-        return false;
+    public String withdraw(double amount){
+        addTransaction("Withdraw", amount, "FAILURE");
+        return "NO withdraw for FIXED_DEPOSIT";
     }
     public double getInterestRate(){
         return 0.7;

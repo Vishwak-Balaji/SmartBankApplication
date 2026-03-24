@@ -7,23 +7,23 @@ public class CurrentAccount extends Account {
         super(accountNumber, holderName, AccountType.CURRENT, balance);
     }
 
-    public boolean withdraw(double amount){
+    public String withdraw(double amount){
         if (isFrozen()) {
-            addTransaction("Withdraw", amount, "Account is frozen");
-            return false;
+            addTransaction("Withdraw", amount, "FAILURE");
+            return "Account is frozen";
         }
         if(amount>getBalance()){
-            addTransaction("Withdraw", amount, "Insufficient balance");
-            return false;
+            addTransaction("Withdraw", amount, "FAILURE");
+            return "Insufficient balance";
         }
-        if(Min_Balance<getBalance()-amount){
-            addTransaction("Withdraw", amount, "violating minimum balance");
-            return false;
+        if(getBalance() - amount < Min_Balance){
+            addTransaction("Withdraw", amount, "FAILURE");
+            return "violating minimum balance";
         }
         setBalance(getBalance()-amount);
         incrementSessionWithdrawalCount();
-        addTransaction("Withdraw", amount, "Success");
-        return true;
+        addTransaction("Withdraw", amount, "SUCCESS");
+        return "SUCCESS";
     }
     public double getInterestRate(){
         return 0.0;
