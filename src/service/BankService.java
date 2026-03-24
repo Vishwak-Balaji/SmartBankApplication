@@ -108,6 +108,10 @@ public class BankService {
             System.out.println("One account is frozen");
             return;
         }
+        if(sender.getAccountType() == AccountType.FIXED_DEPOSIT){
+            System.out.println("Transfer not allowed from Fixed Deposit account");
+            return;
+        }
         if(amount <= 0){
             System.out.println("Invalid amount");
             return;
@@ -179,11 +183,10 @@ public class BankService {
                 );
                 found = true;
             }
-            if(!found){
+        }
+        if(!found){
                 System.out.println("No account is frozen");
             }
-
-        }
     }
 
     public void unfreezeAcc(String accNo){
